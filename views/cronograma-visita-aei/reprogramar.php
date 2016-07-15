@@ -13,7 +13,7 @@ use yii\helpers\Html;
         <select id="cronograma_visita_aei-codigo_modular" name="CronogramaVisitaAei[codigo_modular]" class="form-control" onchange="Docente($(this).val())">
             <option value></option>
             <?php foreach($instituciones as $institucion): ?>
-            <option value="<?= $institucion->codigo_modular ?>"><?= $institucion->denominacion ?> </option>
+            <option value="<?= $institucion->codigo_modular ?>" <?= ($model->codigo_modular==$institucion->codigo_modular)?'selected':'' ?>><?= $institucion->denominacion ?> </option>
             <?php endforeach;?>
         </select>
         
