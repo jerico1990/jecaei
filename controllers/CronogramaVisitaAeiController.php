@@ -233,8 +233,8 @@ class CronogramaVisitaAeiController extends Controller
         if($f1 || $f2)
         {
             echo "<script>
-                alert('No puedes');
-                
+                alert('No puedes realizar la reprogramación');
+                window.location = '../cronograma-visita-aei/index';
                 </script>";
             //return $this->redirect(['cronograma-visita-aei/index']);
         }
