@@ -127,7 +127,16 @@ class CronogramaF1AeiController extends Controller
     public function actionNuevo($id)
     {
         $visita=CronogramaVisitaAei::findOne($id);
-        $model=new CronogramaF1Aei;
+        $model=CronogramaF1Aei::find()->where('cronograma_aei_visita_id=:cronograma_aei_visita_id',[':cronograma_aei_visita_id'=>$id])->one();
+        if(!$model)
+        {
+            $model=new CronogramaF1Aei;
+        }
+        else
+        {
+            
+        }
+        
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->cronograma_aei_visita_id=$id;
             $model->estado=1;

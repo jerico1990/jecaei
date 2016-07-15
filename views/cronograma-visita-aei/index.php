@@ -50,9 +50,12 @@ if (isset($_GET['page']) >= 2)
                     <td><?= $visita["denominacion"] ?></td>
                     <td><?= $visita["nombres"] ?></td>
                     <td><?= $visita["visita"] ?></td>
-                    <td><?= Html::a('<span class="glyphicon glyphicon-pencil"></span>',['cronograma-f1-aei/nuevo','id'=>$visita["id"]],['class'=>' btn btn-default']);?></td>
-                    <td><?= Html::a('<span class="glyphicon glyphicon-pencil"></span>',['cronograma-f2-aei/nuevo','id'=>$visita["id"]],['class'=>' btn btn-default']);?></td>
-                    <td></td>
+                    <td><?= Html::a('<span class="glyphicon glyphicon-list-alt"></span>',['cronograma-f1-aei/nuevo','id'=>$visita["id"]],['class'=>' ']);?></td>
+                    <td><?= Html::a('<span class="glyphicon glyphicon-list-alt"></span>',['cronograma-f2-aei/nuevo','id'=>$visita["id"]],['class'=>' ']);?></td>
+                    <td>
+                        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span>',['cronograma-f1-aei/nuevo','id'=>$visita["id"]],['class'=>' ']);?>
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </td>
                 </tr>
             <?php $i++; ?>
             <?php } ?>

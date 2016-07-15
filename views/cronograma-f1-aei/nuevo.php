@@ -13,11 +13,11 @@ use yii\helpers\Html;
         <label>Grado:</label>
         <select name="CronogramaF1Aei[grado]" id="cronograma_f1_aei-grado" class="form-control" onchange="Grado(event,$(this).val(),'<?= $visita->codigo_modular ?>')">
             <option></option>
-            <option value=10>1er</option>
-            <option value=11>2do</option>
-            <option value=12>3er</option>
-            <option value=13>4to</option>
-            <option value=14>5to</option>
+            <option value=10 <?= ($model->grado==10)?'selected':'' ?> >1er</option>
+            <option value=11 <?= ($model->grado==11)?'selected':'' ?>>2do</option>
+            <option value=12 <?= ($model->grado==12)?'selected':'' ?>>3er</option>
+            <option value=13 <?= ($model->grado==13)?'selected':'' ?>>4to</option>
+            <option value=14 <?= ($model->grado==14)?'selected':'' ?>>5to</option>
         </select>
     </div>
 </div>
@@ -26,26 +26,28 @@ use yii\helpers\Html;
         <label>Sección:</label>
         <select name="CronogramaF1Aei[seccion]" id="cronograma_f1_aei-seccion" class="form-control">
             <option></option>
+            
+            
         </select>
     </div>
 </div>
 <div class="col-md-2">
     <div class="form-group nro_estudiantes">
         <label>Nro. estudiantes:</label>
-        <input type="text" name="CronogramaF1Aei[nro_estudiantes]" id="cronograma_f1_aei-nro_estudiantes" class="form-control">
+        <input type="text" name="CronogramaF1Aei[nro_estudiantes]" id="cronograma_f1_aei-nro_estudiantes" class="form-control" value="<?= $model->nro_estudiantes ?>">
     </div>
 </div>
 <div class="clearfix"></div>
 <div class="col-md-2">
     <div class="form-group hora_inicio">
         <label>Hora inicio:</label>
-        <input type="time" name="CronogramaF1Aei[hora_inicio]" id="cronograma_f1_aei-hora_inicio" class="form-control">
+        <input type="time" name="CronogramaF1Aei[hora_inicio]" id="cronograma_f1_aei-hora_inicio" class="form-control" value="<?= $model->hora_inicio ?>">
     </div>
 </div>
 <div class="col-md-2">
     <div class="form-group hora_fin">
         <label>Hora fin:</label>
-        <input type="time" name="CronogramaF1Aei[hora_fin]" id="cronograma_f1_aei-hora_fin" class="form-control">
+        <input type="time" name="CronogramaF1Aei[hora_fin]" id="cronograma_f1_aei-hora_fin" class="form-control" value="<?= $model->hora_fin ?>">
     </div>
 </div>
 <div class="clearfix"></div>
@@ -66,11 +68,11 @@ use yii\helpers\Html;
                     <div class="form-group c1_p1">
                         <select id="cronograma_f1_aei-c1_p1" name="CronogramaF1Aei[c1_p1]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c1_p1==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c1_p1==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c1_p1==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c1_p1==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c1_p1==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -81,11 +83,11 @@ use yii\helpers\Html;
                     <div class="form-group c1_p2">
                         <select id="cronograma_f1_aei-c1_p2" name="CronogramaF1Aei[c1_p2]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c1_p2==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c1_p2==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c1_p2==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c1_p2==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c1_p2==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -96,11 +98,11 @@ use yii\helpers\Html;
                     <div class="form-group c1_p3">
                         <select id="cronograma_f1_aei-c1_p3" name="CronogramaF1Aei[c1_p3]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c1_p3==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c1_p3==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c1_p3==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c1_p3==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c1_p3==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -128,11 +130,11 @@ use yii\helpers\Html;
                     <div class="form-group c2_p1">
                         <select id="cronograma_f1_aei-c2_p1" name="CronogramaF1Aei[c2_p1]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c2_p1==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c2_p1==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c2_p1==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c2_p1==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c2_p1==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -143,11 +145,11 @@ use yii\helpers\Html;
                     <div class="form-group c2_p2">
                         <select id="cronograma_f1_aei-c2_p2" name="CronogramaF1Aei[c2_p2]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c2_p2==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c2_p2==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c2_p2==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c2_p2==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c2_p2==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -158,11 +160,11 @@ use yii\helpers\Html;
                     <div class="form-group c2_p3">
                         <select id="cronograma_f1_aei-c2_p3" name="CronogramaF1Aei[c2_p3]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c2_p3==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c2_p3==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c2_p3==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c2_p3==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c2_p3==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -190,11 +192,11 @@ use yii\helpers\Html;
                     <div class="form-group c3_p1">
                         <select id="cronograma_f1_aei-c3_p1" name="CronogramaF1Aei[c3_p1]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c3_p1==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c3_p1==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c3_p1==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c3_p1==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c3_p1==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -205,11 +207,11 @@ use yii\helpers\Html;
                     <div class="form-group c3_p2">
                         <select id="cronograma_f1_aei-c3_p2" name="CronogramaF1Aei[c3_p2]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c3_p2==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c3_p2==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c3_p2==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c3_p2==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c3_p2==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -220,11 +222,11 @@ use yii\helpers\Html;
                     <div class="form-group c3_p3">
                         <select id="cronograma_f1_aei-c3_p3" name="CronogramaF1Aei[c3_p3]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c3_p3==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c3_p3==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c3_p3==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c3_p3==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c3_p3==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -252,11 +254,11 @@ use yii\helpers\Html;
                     <div class="form-group c4_p1">
                         <select id="cronograma_f1_aei-c4_p1" name="CronogramaF1Aei[c4_p1]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c4_p1==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c4_p1==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c4_p1==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c4_p1==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c4_p1==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -267,11 +269,11 @@ use yii\helpers\Html;
                     <div class="form-group c4_p2">
                         <select id="cronograma_f1_aei-c4_p2" name="CronogramaF1Aei[c4_p2]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c4_p2==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c4_p2==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c4_p2==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c4_p2==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c4_p2==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -282,11 +284,11 @@ use yii\helpers\Html;
                     <div class="form-group c4_p3">
                         <select id="cronograma_f1_aei-c4_p3" name="CronogramaF1Aei[c4_p3]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c4_p3==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c4_p3==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c4_p3==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c4_p3==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c4_p3==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -314,11 +316,11 @@ use yii\helpers\Html;
                     <div class="form-group c5_p1">
                         <select id="cronograma_f1_aei-c5_p1" name="CronogramaF1Aei[c5_p1]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c5_p1==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c5_p1==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c5_p1==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c5_p1==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c5_p1==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -329,11 +331,11 @@ use yii\helpers\Html;
                     <div class="form-group c5_p2">
                         <select id="cronograma_f1_aei-c5_p2" name="CronogramaF1Aei[c5_p2]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c5_p2==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c5_p2==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c5_p2==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c5_p2==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c5_p2==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -344,11 +346,11 @@ use yii\helpers\Html;
                     <div class="form-group c5_p3">
                         <select id="cronograma_f1_aei-c5_p3" name="CronogramaF1Aei[c5_p3]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c5_p3==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c5_p3==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c5_p3==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c5_p3==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c5_p3==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -376,11 +378,11 @@ use yii\helpers\Html;
                     <div class="form-group c6_p1">
                         <select id="cronograma_f1_aei-c6_p1" name="CronogramaF1Aei[c6_p1]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c6_p1==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c6_p1==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c6_p1==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c6_p1==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c6_p1==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -391,11 +393,11 @@ use yii\helpers\Html;
                     <div class="form-group c6_p2">
                         <select id="cronograma_f1_aei-c6_p2" name="CronogramaF1Aei[c6_p2]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c6_p2==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c6_p2==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c6_p2==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c6_p2==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c6_p2==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
@@ -406,11 +408,11 @@ use yii\helpers\Html;
                     <div class="form-group c6_p3">
                         <select id="cronograma_f1_aei-c6_p3" name="CronogramaF1Aei[c6_p3]" class="form-control">
                             <option></option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
+                            <option value=1 <?= ($model->c6_p3==1)?'selected':'' ?>>1</option>
+                            <option value=2 <?= ($model->c6_p3==2)?'selected':'' ?>>2</option>
+                            <option value=3 <?= ($model->c6_p3==3)?'selected':'' ?>>3</option>
+                            <option value=4 <?= ($model->c6_p3==4)?'selected':'' ?>>4</option>
+                            <option value=5 <?= ($model->c6_p3==5)?'selected':'' ?>>5</option>
                         </select>
                     </div>
                 </td>
