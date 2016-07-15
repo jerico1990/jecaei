@@ -9,7 +9,8 @@ $floor = 1;
 if (isset($_GET['page']) >= 2)
     $floor += ($visitas['pages']->pageSize * $_GET['page']) - $visitas['pages']->pageSize;
 ?>
-
+<script src="<?= \Yii::$app->request->BaseUrl ?>/js/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 <?php $form = ActiveForm::begin([
     'action' => ['index'],
@@ -53,8 +54,8 @@ if (isset($_GET['page']) >= 2)
                     <td><?= Html::a('<span class="glyphicon glyphicon-list-alt"></span>',['cronograma-f1-aei/nuevo','id'=>$visita["id"]],['class'=>' ']);?></td>
                     <td><?= Html::a('<span class="glyphicon glyphicon-list-alt"></span>',['cronograma-f2-aei/nuevo','id'=>$visita["id"]],['class'=>' ']);?></td>
                     <td>
-                        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span>',['cronograma-f1-aei/nuevo','id'=>$visita["id"]],['class'=>' ']);?>
-                        <span class="glyphicon glyphicon-trash"></span>
+                        <?= Html::a('<span class="glyphicon glyphicon-pencil" "onclick"="Reprogramar('.$visita["id"].')"></span>',['cronograma-visita-aei/reprogramar','id'=>$visita["id"]],[]);?>
+                        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>',['cronograma-visita-aei/eliminar','id'=>$visita["id"]],[]);?>
                     </td>
                 </tr>
             <?php $i++; ?>
@@ -62,3 +63,15 @@ if (isset($_GET['page']) >= 2)
         </tbody>
     </table>
 </div>
+<?php
+    $reprogramar= Yii::$app->getUrlManager()->createUrl('cronograma-visita-aei/validar-reprogramar');
+?>
+<script>
+    function Reprogramar(id) {
+        $.get( "<?= $reprogramar ?>?id="+id, function( data ) {
+            alert(data);
+            return false;
+        });
+        return false;
+    }
+</script>

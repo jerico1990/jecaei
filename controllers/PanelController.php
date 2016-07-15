@@ -49,7 +49,7 @@ class PanelController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect(['cronograma-visita-aei/index']);
     }
 
 }

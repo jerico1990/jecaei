@@ -8,6 +8,9 @@ use app\models\CronogramaVisitaAeiSearch;
 use app\models\Usuario;
 use app\models\Persona;
 use app\models\Alumnos;
+use app\models\CronogramaF1Aei;
+use app\models\CronogramaF2Aei;
+
 
 use app\models\CronogramaAeiPersona;
 use yii\web\Controller;
@@ -219,6 +222,47 @@ class CronogramaVisitaAeiController extends Controller
         }
         else{
             echo "<option value></option>";
+        }
+    }
+    
+    public function actionReprogramar($id)
+    {
+        $model=CronogramaVisitaAei::findOne($id);
+        $f1=CronogramaF1Aei::find()->where('cronograma_aei_visita_id=:cronograma_aei_visita_id',[':cronograma_aei_visita_id'=>$id])->one();
+        $f2=CronogramaF2Aei::find()->where('cronograma_aei_visita_id=:cronograma_aei_visita_id',[':cronograma_aei_visita_id'=>$id])->one();
+        if($f1 || $f2)
+        {
+            echo "<script>
+                alert('No puedes');
+                
+                </script>";
+            //return $this->redirect(['cronograma-visita-aei/index']);
+        }
+        $usuario=Usuario::findOne(Yii::$app->user->identity->id);
+        $instituciones= CronogramaAeiPersona::find()
+                        ->select('institucion.id as id_institucion,institucion.codigo_modular ,institucion.denominacion')
+                        ->innerJoin('institucion','institucion.codigo_modular=cronograma_aei_persona.codigo_modular and institucion.estado=1')
+                        ->where('cronograma_aei_persona.id_persona=:id_persona',[':id_persona'=>$usuario->id_persona])->all();
+        
+        if($model->load(Yii::$app->request->post()) && $model->validate())
+        {
+            $model->fecha_registro=date("Y-m-d H:i:s");
+            $model->usuario_creador=Yii::$app->user->identity->id;
+            $model->estado=1;
+            $model->save();
+        }
+        
+        
+        return $this->render('reprogramar',['instituciones'=>$instituciones,'model'=>$model]);
+    }
+    
+    public function actionValidarReprogramar($id)
+    {
+        $f1=CronogramaF1Aei::find()->where('cronograma_aei_visita_id=:cronograma_aei_visita_id',[':cronograma_aei_visita_id'=>$id])->one();
+        $f2=CronogramaF2Aei::find()->where('cronograma_aei_visita_id=:cronograma_aei_visita_id',[':cronograma_aei_visita_id'=>$id])->one();
+        if($f1 || $f2)
+        {
+            echo "No puedes reprogramar";
         }
     }
 }
