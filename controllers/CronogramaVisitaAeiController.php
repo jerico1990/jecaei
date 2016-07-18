@@ -11,15 +11,22 @@ use app\models\Alumnos;
 use app\models\CronogramaF1Aei;
 use app\models\CronogramaF2Aei;
 
-
+use yii\web\UploadedFile;
 use app\models\CronogramaAeiPersona;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\filters\AccessControl;
 /**
  * CronogramaVisitaAeiController implements the CRUD actions for CronogramaVisitaAei model.
  */
+/*
+estado
+0=inactivo;
+1=activo;
+2=reprogramar;
+
+*/
 class CronogramaVisitaAeiController extends Controller
 {
     /**
@@ -28,13 +35,23 @@ class CronogramaVisitaAeiController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
+    
     }
 
     /**
@@ -143,6 +160,7 @@ class CronogramaVisitaAeiController extends Controller
             $model->usuario_creador=Yii::$app->user->identity->id;
             $model->estado=1;
             $model->save();
+            return $this->redirect(['cronograma-visita-aei/index']);
         }
         
         
@@ -180,10 +198,10 @@ class CronogramaVisitaAeiController extends Controller
     public function actionGetVisitas($docente_id)
     {
         $countVisitas=CronogramaVisitaAei::find()
-                        ->where('docente_id=:docente_id',[':docente_id'=>$docente_id])
+                        ->where('docente_id=:docente_id and estado in (1,2)',[':docente_id'=>$docente_id])
                         ->count();
         $visitas=CronogramaVisitaAei::find()
-                        ->where('docente_id=:docente_id',[':docente_id'=>$docente_id])
+                        ->where('docente_id=:docente_id and estado in (1,2)',[':docente_id'=>$docente_id])
                         ->all();
         $arrVisitas=[1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8];
         if($countVisitas>0){
@@ -244,16 +262,50 @@ class CronogramaVisitaAeiController extends Controller
                         ->innerJoin('institucion','institucion.codigo_modular=cronograma_aei_persona.codigo_modular and institucion.estado=1')
                         ->where('cronograma_aei_persona.id_persona=:id_persona',[':id_persona'=>$usuario->id_persona])->all();
         
+        $docentes=Persona::find()
+                        ->select('docente.id,persona.nombre,persona.appaterno,persona.apmaterno,persona.nrodoc')
+                        ->innerJoin('docente','persona.id=docente.id_persona and docente.id_curso in (15)')
+                        ->innerJoin('institucion','docente.id_institucion=institucion.id')
+                        ->where('institucion.codigo_modular=:codigo_modular',[':codigo_modular'=>$model->codigo_modular])
+                        ->groupBy('persona.appaterno,persona.apmaterno,persona.nombre')
+                        ->orderBy('persona.appaterno,persona.apmaterno,persona.nombre')->all();
+        
+        
         if($model->load(Yii::$app->request->post()) && $model->validate())
         {
-            $model->fecha_registro=date("Y-m-d H:i:s");
-            $model->usuario_creador=Yii::$app->user->identity->id;
-            $model->estado=1;
+            $reprograma=new CronogramaVisitaAei;
+            $reprograma->docente_id=$model->docente_id;
+            $reprograma->visita=$model->visita;
+            $reprograma->usuario_creador=$model->usuario_creador;
+            $reprograma->codigo_modular=$model->codigo_modular;
+            $reprograma->estado=2;
+            $reprograma->fecha_registro=date("Y-m-d H:i:s");
+            $reprograma->reprogramacion=1;
+            $reprograma->save();
+            
+            
+            $reprograma->archivo = UploadedFile::getInstance($model, 'archivo');
+            if($reprograma->archivo)
+            {
+                $reprograma->documento=$reprograma->id. '.' . $reprograma->archivo->extension;
+                $reprograma->update();
+                $reprograma->archivo->saveAs('documento/' . $reprograma->id . '.' . $reprograma->archivo->extension);
+            }
+            
+            //$model->fecha_registro=date("Y-m-d H:i:s");
+            //$model->usuario_creador=Yii::$app->user->identity->id;
+            
+            $model->estado=0;
             $model->save();
+            
+            return $this->redirect(['cronograma-visita-aei/index']);
         }
         
         
-        return $this->render('reprogramar',['instituciones'=>$instituciones,'model'=>$model]);
+        return $this->render('reprogramar',
+                             ['instituciones'=>$instituciones,
+                              'model'=>$model,'docentes'=>$docentes,
+                              'visita'=>$model->visita]);
     }
     
     public function actionValidarReprogramar($id)
@@ -264,5 +316,13 @@ class CronogramaVisitaAeiController extends Controller
         {
             echo "No puedes reprogramar";
         }
+    }
+    
+    public function actionEliminar($id)
+    {
+        $visita=CronogramaVisitaAei::find()->where('id=:id',[':id'=>$id])->one();
+        $visita->estado=0;
+        $visita->update();
+        
     }
 }

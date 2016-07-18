@@ -47,7 +47,7 @@ use yii\helpers\Html;
 <div class="clearfix"></div>
 <div class="col-md-6">
     <div class="form-group">
-        <input type="submit" id="guardar" class="btn" value="Guardar">
+        <input type="submit" id="guardar" class="btn" value="Finalizar">
     </div>
 </div>
 
@@ -124,7 +124,14 @@ use yii\helpers\Html;
         }
         else
         {
-           return true; 
+            var txt;
+            var r = confirm("¿Estás seguro de finalizar la programación de tu visita?");
+            if (r == true) {
+                return true; 
+            } else {
+                return false; 
+            }
+           
         }
     });
 </script>

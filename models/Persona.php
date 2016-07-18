@@ -47,6 +47,7 @@ class Persona extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $docente_id;
     public static function tableName()
     {
         return 'persona';

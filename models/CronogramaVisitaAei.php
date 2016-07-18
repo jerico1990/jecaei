@@ -3,7 +3,7 @@
 namespace app\models;
 use yii\db\Query;
 use Yii;
-
+use yii\web\UploadedFile;
 /**
  * This is the model class for table "cronograma_visita_aei".
  *
@@ -22,6 +22,10 @@ class CronogramaVisitaAei extends \yii\db\ActiveRecord
      * @inheritdoc
      */
     public $buscar;
+    public $archivo;
+    public $documento;
+    public $f1;
+    public $f2;
     public static function tableName()
     {
         return 'cronograma_visita_aei';
@@ -38,6 +42,7 @@ class CronogramaVisitaAei extends \yii\db\ActiveRecord
             [['fecha_visita', 'fecha_registro'], 'safe'],
             [['codigo_modular'], 'string', 'max' => 7],
             [['buscar'], 'string', 'max' => 150],
+            [['archivo'], 'file'],
         ];
     }
 
@@ -70,14 +75,16 @@ class CronogramaVisitaAei extends \yii\db\ActiveRecord
                             cronograma_visita_aei.id,
                             institucion.denominacion,
                             concat(persona.nombre," ",persona.appaterno," ",persona.apmaterno) as nombres,
-                            cronograma_visita_aei.visita
+                            cronograma_visita_aei.visita,
+                            cronograma_visita_aei.documento,
+                            cronograma_visita_aei.estado
                             '])
             ->from('cronograma_visita_aei')
             ->innerJoin('cronograma_aei_persona','cronograma_aei_persona.codigo_modular=cronograma_visita_aei.codigo_modular')
             ->innerJoin('institucion','institucion.codigo_modular=cronograma_aei_persona.codigo_modular and institucion.estado=1')
             ->innerJoin('docente','docente.id=cronograma_visita_aei.docente_id')
             ->innerJoin('persona','persona.id=docente.id_persona')
-            ->where('cronograma_aei_persona.id_persona=:id_persona',[':id_persona'=>$usuario->id_persona]);
+            ->where('cronograma_aei_persona.id_persona=:id_persona and cronograma_visita_aei.estado in (1,2)',[':id_persona'=>$usuario->id_persona]);
         }
         else
         {
@@ -85,14 +92,17 @@ class CronogramaVisitaAei extends \yii\db\ActiveRecord
                             cronograma_visita_aei.id,
                             institucion.denominacion,
                             concat(persona.nombre," ",persona.appaterno," ",persona.apmaterno) as nombres,
-                            cronograma_visita_aei.visita
+                            cronograma_visita_aei.visita,
+                            cronograma_visita_aei.documento,
+                            cronograma_visita_aei.estado
                             '])
             ->from('cronograma_visita_aei')
             ->innerJoin('cronograma_aei_persona','cronograma_aei_persona.codigo_modular=cronograma_visita_aei.codigo_modular')
             ->innerJoin('institucion','institucion.codigo_modular=cronograma_aei_persona.codigo_modular and institucion.estado=1')
             ->innerJoin('docente','docente.id=cronograma_visita_aei.docente_id')
             ->innerJoin('persona','persona.id=docente.id_persona')
-            ->where('cronograma_aei_persona.id_persona=:id_persona and concat(institucion.denominacion," ",persona.nombre," ",persona.appaterno," ",persona.apmaterno) like "%'.$buscar.'%"',[':id_persona'=>$usuario->id_persona]);
+            ->where('cronograma_aei_persona.id_persona=:id_persona and concat(institucion.denominacion," ",persona.nombre," ",persona.appaterno," ",persona.apmaterno) like "%'.$buscar.'%" and cronograma_visita_aei.estado in (1,2)',
+                    [':id_persona'=>$usuario->id_persona]);
         }
         
           

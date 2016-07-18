@@ -39,6 +39,7 @@ if (isset($_GET['page']) >= 2)
             <th><b>IIEE</b></th>
             <th><b>Docente</b></th>
             <th><b>Visita</b></th>
+            <th><b>Documento</b></th>
             <th><b>F1</b></th>
             <th><b>F2</b></th>
             <th><b>Opciones</b></th>
@@ -51,11 +52,19 @@ if (isset($_GET['page']) >= 2)
                     <td><?= $visita["denominacion"] ?></td>
                     <td><?= $visita["nombres"] ?></td>
                     <td><?= $visita["visita"] ?></td>
+                    <td>
+                        <?php if($visita["documento"]){ ?>
+                        <a href="<?= \Yii::$app->request->BaseUrl ?>/documento/<?= $visita["documento"] ?>"><span class="glyphicon glyphicon-cloud-download"></span></a>
+                        <?php } ?>
+                    </td>
                     <td><?= Html::a('<span class="glyphicon glyphicon-list-alt"></span>',['cronograma-f1-aei/nuevo','id'=>$visita["id"]],['class'=>' ']);?></td>
                     <td><?= Html::a('<span class="glyphicon glyphicon-list-alt"></span>',['cronograma-f2-aei/nuevo','id'=>$visita["id"]],['class'=>' ']);?></td>
                     <td>
-                        <?= Html::a('<span class="glyphicon glyphicon-pencil" "onclick"="Reprogramar('.$visita["id"].')"></span>',['cronograma-visita-aei/reprogramar','id'=>$visita["id"]],[]);?>
-                        <?= Html::a('<span class="glyphicon glyphicon-trash"></span>',['cronograma-visita-aei/eliminar','id'=>$visita["id"]],[]);?>
+                        <?php if($visita["estado"]==1){ ?>
+                        <?= Html::a('<span class="glyphicon glyphicon-pencil" ></span>',['cronograma-visita-aei/reprogramar','id'=>$visita["id"]],[]);?>
+                        <?php } ?>
+                        <span class="glyphicon glyphicon-trash" style="cursor: pointer" onclick="Eliminar(<?= $visita["id"]?>)"></span>
+                        <?php //= Html::a('<span class="glyphicon glyphicon-trash"></span>',['cronograma-visita-aei/eliminar','id'=>$visita["id"]],[]);?>
                     </td>
                 </tr>
             <?php $i++; ?>
@@ -65,11 +74,20 @@ if (isset($_GET['page']) >= 2)
 </div>
 <?php
     $reprogramar= Yii::$app->getUrlManager()->createUrl('cronograma-visita-aei/validar-reprogramar');
+    $eliminar= Yii::$app->getUrlManager()->createUrl('cronograma-visita-aei/eliminar');
 ?>
 <script>
     function Reprogramar(id) {
         $.get( "<?= $reprogramar ?>?id="+id, function( data ) {
             alert(data);
+            return false;
+        });
+        return false;
+    }
+    
+    function Eliminar(id) {
+        $.get( "<?= $eliminar ?>?id="+id, function( data ) {
+            alert("Se ha eliminado el registro");
             return false;
         });
         return false;
