@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2016 a las 15:12:28
+-- Tiempo de generación: 18-07-2016 a las 09:54:14
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.6.8
 
@@ -58,6 +58,13 @@ CREATE TABLE IF NOT EXISTS `cronograma_f1_aei` (
   `estado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `cronograma_f1_aei`
+--
+
+INSERT INTO `cronograma_f1_aei` (`id`, `cronograma_aei_visita_id`, `grado`, `seccion`, `nro_estudiantes`, `hora_inicio`, `hora_fin`, `c1_p1`, `c1_p2`, `c1_p3`, `c2_p1`, `c2_p2`, `c2_p3`, `c3_p1`, `c3_p2`, `c3_p3`, `c4_p1`, `c4_p2`, `c4_p3`, `c5_p1`, `c5_p2`, `c5_p3`, `c6_p1`, `c6_p2`, `c6_p3`, `aspecto_abordado`, `compromisos`, `fecha_registro`, `estado`) VALUES
+(1, 11, 10, '1', 15, '01:00:00', '13:00:00', 1, 1, 1, 2, 1, 1, 1, 2, 2, 1, 2, 3, 1, 3, 4, 2, 2, 2, NULL, NULL, NULL, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -109,9 +116,11 @@ CREATE TABLE IF NOT EXISTS `cronograma_visita_aei` (
   `usuario_creador` int(11) DEFAULT NULL,
   `codigo_modular` varchar(7) DEFAULT NULL,
   `fecha_visita` datetime DEFAULT NULL,
+  `documento` varchar(250) DEFAULT NULL,
   `fecha_registro` datetime DEFAULT NULL,
-  `estado` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `estado` int(11) DEFAULT NULL,
+  `reprogramacion` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Índices para tablas volcadas
@@ -153,7 +162,7 @@ ALTER TABLE `cronograma_f2_aei`
 -- AUTO_INCREMENT de la tabla `cronograma_visita_aei`
 --
 ALTER TABLE `cronograma_visita_aei`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
